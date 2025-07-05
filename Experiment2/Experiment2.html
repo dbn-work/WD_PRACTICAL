@@ -1,0 +1,168 @@
+<!-- Apply internal and external CSS for styling. Include selectors, classes, ID, and text formatting. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Personal Profile</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Internal CSS -->
+    <style>
+        body {
+            font-family: Verdana, Arial, sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #009688; /* Teal */
+            color: #fff;
+            padding: 24px 0;
+            text-align: center;
+        }
+        h1 {
+            letter-spacing: 2px;
+            font-size: 2.5em;
+            color: #fffde7;
+        }
+        .highlight { 
+            color: #fff;
+            font-weight: bold;
+            margin: 0 4px;
+            display: inline-block;
+            padding: 2px 10px;
+            background: #ff9800; /* Orange */
+            border-radius: 12px;
+            font-size: 1em;
+        }
+        #about {
+            background: #e1f5fe; /* Light blue */
+            padding: 18px;
+            border-radius: 10px;
+            margin: 30px 10%;
+            box-shadow: 0 2px 8px #b2ebf2;
+        }
+        section {
+            margin: 30px 10%;
+        }
+        section h2 {
+            color: #7c4dff; /* Purple */
+            border-bottom: 2px solid #ff9800;
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+        }
+        ul {
+            list-style-type: square;
+        }
+        ul li {
+            font-size: 1.08em;
+            margin-bottom: 6px;
+        }
+        a {
+            color: #009688;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #ff9800;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 8px #e0e0e0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #7c4dff; /* Purple */
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background: #f3e5f5; /* Light purple */
+        }
+        tr:nth-child(odd) {
+            background: #fff;
+        }
+        footer {
+            background: #009688;
+            color: #fff;
+            text-align: center;
+            padding: 12px 0;
+            margin-top: 30px;
+            font-size: 1em;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="main-title">Bhaskar Dhuri</h1>
+        <p class="highlight">Web Developer | Designer | Technology Enthusiast</p>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hello! I'm <span class="highlight">Bhaskar Dhuri</span>, a passionate web developer with a focus on building modern, user-friendly websites and applications. I love learning new technologies and solving real-world problems with code.</p>
+    </section>
+
+    <section>
+        <h2>Skills</h2>
+        <ul>
+            <li>HTML5</li>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <li>Git and GitHub</li>
+        </ul>
+    </section>
+    <section>
+        <h2>Education</h2>
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Degree</th>
+                    <th>Institution</th>
+                    <th>Year</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bachelor's in Artificial Intelligence and Machine Learning</td>
+                    <td>Modern College of Engineering, Pune</td>
+                    <td>2025</td>
+                    <td>8.51 CGPA</td>
+                </tr>
+                <tr>
+                    <td>Diploma in Computer Engineering</td>
+                    <td>Yashwantrao Bhonsale Institute of Technology, Sawantwadi</td>
+                    <td>2022</td>
+                    <td>88.74%</td>
+                </tr>
+                <tr>
+                    <td>SSC</td>
+                    <td>Nutan Madhyamik Vidylay,Insuli</td>
+                    <td>2019</td>
+                    <td>88.70%</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Contact</h2>
+        <ul>
+            <li>Email: <span class="highlight">bbdhuri@ybit.ac.in</span></li>
+            <li>Website: <a href="https://www.bhaskardhuri.dev">www.bhaskardhuri.dev</a></li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/bhaskar-dhuri-837841223/">linkedin.com/in/bhaskar-dhuri-837841223</a></li>
+        </ul>
+    </section>
+    <footer>
+        <p>&copy; 2025 Bhaskar Dhuri</p>
+    </footer>
+</body>
+</html>
