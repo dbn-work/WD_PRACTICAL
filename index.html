@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<lang="en">
 <head>
     <meta charset="UTF-8">
     <title>SE Practical Experiments Home</title>
@@ -213,10 +213,9 @@
         </nav>
     </div>
     <script>
-        function loadExp(page) {
-            document.getElementById('expFrame').src = page;
-        }
-        function loadDoc(docPath) {
+        function loadExp(page) 
+        { document.getElementById('expFrame').src = page; }
+        function loadDoc(docPath){
             // For local files, Google Docs Viewer will not work.
             // You must upload your DOCX files to a public server for this to work.
             var url = location.origin + '/' + docPath;
