@@ -1,79 +1,1326 @@
-<!-- Create a personal profile page using HTML5 tags including 
-headings, lists, links, and tables. -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Personal Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 1 - Personal Profile Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header-title {
+            text-align: center;
+            flex: 1;
+        }
+
+        .header-title h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header-title p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .theory-section {
+            background: #ffffff;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .theory-section h2 {
+            color: #6366f1;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theory-questions {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-left: 4px solid #6366f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .theory-questions ol {
+            padding-left: 20px;
+        }
+
+        .theory-questions li {
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .code-section {
+            background: #ffffff;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .code-header {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .language-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+            padding-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            color: #6b7280;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .tab-btn.active {
+            background: #6366f1;
+            color: white;
+            border-color: #6366f1;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #e2e8f0;
+            color: #374151;
+        }
+
+        .code-content {
+            padding: 0 20px 20px;
+        }
+
+        .code-block {
+            display: none;
+            background: #1e293b;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .code-block.active {
+            display: block;
+        }
+
+        .code-block pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            margin: 0;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .output-section {
+            background: #ffffff;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .output-header {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .output-content {
+            padding: 20px;
+        }
+
+        .output-display {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 400px;
+            overflow-y: auto;
+        }
+
+        .preview-frame {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .run-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .run-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .html-tags-section {
+            background: #ffffff;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .html-tags-section h2 {
+            color: #6366f1;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tags-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tag-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .tag-item code {
+            background: #6366f1;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .tag-item p {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .preview-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .open-btn {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .open-btn:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .language-tabs {
+                flex-wrap: wrap;
+            }
+
+            .tags-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <header>
-        <h1>Bhaskar Dhuri</h1>
-        <p>Web Developer | Designer | Technology Enthusiast</p>
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+            <div class="header-title">
+                <h1>Experiment 1</h1>
+                <p>Personal Profile Page using HTML5 Tags</p>
+            </div>
+            <div style="width: 120px;"></div>
+        </div>
     </header>
 
-    <section>
-        <h2>About Me</h2>
-        <p>Hello! I'm Bhaskar Dhuri, a passionate web developer with a focus on building modern, user-friendly websites and applications. I love learning new technologies and solving real-world problems with code.</p>
-    </section>
+    <div class="container">
+        <!-- Theory Section -->
+        <section class="theory-section">
+            <h2><i class="fas fa-book"></i> Theory</h2>
+            <div class="theory-questions">
+                <ol>
+                    <li>What are HTML5 semantic tags and how do they improve web accessibility?</li>
+                    <li>Explain the difference between ordered lists (&lt;ol&gt;) and unordered lists (&lt;ul&gt;) in HTML.</li>
+                    <li>How do HTML tables help in organizing tabular data and what are their key components?</li>
+                    <li>What is the importance of proper heading hierarchy (h1-h6) in web documents?</li>
+                </ol>
+            </div>
+        </section>
 
-    <section>
-        <h2>Skills</h2>
-        <ul>
-            <li>HTML5</li>
-            <li>JavaScript</li>
-            <li>Python</li>
-            <li>Git and GitHub</li>
-        </ul>
-    </section>
+        <!-- HTML5 Tags Information -->
+        <section class="html-tags-section">
+            <h2><i class="fas fa-tags"></i> HTML5 Tags Used in This Experiment</h2>
+            <div class="tags-grid">
+                <div class="tag-item">
+                    <code>&lt;header&gt;</code>
+                    <p>Defines header content for a document or section</p>
+                </div>
+                <div class="tag-item">
+                    <code>&lt;section&gt;</code>
+                    <p>Defines a section in a document</p>
+                </div>
+                <div class="tag-item">
+                    <code>&lt;h1&gt; - &lt;h6&gt;</code>
+                    <p>Heading tags for different levels</p>
+                </div>
+                <div class="tag-item">
+                    <code>&lt;ul&gt; / &lt;ol&gt;</code>
+                    <p>Unordered and ordered lists</p>
+                </div>
+                <div class="tag-item">
+                    <code>&lt;table&gt;</code>
+                    <p>Creates tables for tabular data</p>
+                </div>
+                <div class="tag-item">
+                    <code>&lt;a&gt;</code>
+                    <p>Creates hyperlinks to other pages or resources</p>
+                </div>
+            </div>
+        </section>
 
-    <section>
-        <h2>Education</h2>
-        <table border="1" cellpadding="5" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Degree</th>
-                    <th>Institution</th>
-                    <th>Year</th>
-                    <th>Grade</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Bachelor's in Artificial Intelligence and Machine Learning</td>
-                    <td>xyz clg</td>
-                    <td>2016</td>
-                    <td>8.51 CGPA</td>
-                </tr>
-                <tr>
-                    <td>HSC</td>
-                    <td>xyz clg</td>
-                    <td>2012</td>
-                    <td>88.74%</td>
-                </tr>
-                <tr>
-                    <td>SSC</td>
-                    <td>XYZ SCHOOL</td>
-                    <td>2010</td>
-                    <td>88.70%</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Code Section -->
+            <div class="code-section">
+                <div class="code-header">
+                    <h3><i class="fas fa-code"></i> HTML Profile Examples</h3>
+                    <button class="copy-btn" onclick="copyCode()">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+                
+                <div class="language-tabs">
+                    <button class="tab-btn active" onclick="showCode('basic')">Basic Profile</button>
+                    <button class="tab-btn" onclick="showCode('semantic')">Semantic HTML5</button>
+                    <button class="tab-btn" onclick="showCode('advanced')">Advanced Profile</button>
+                    <button class="tab-btn" onclick="showCode('styled')">With CSS Styling</button>
+                </div>
 
-    <section>
-        <h2>Contact</h2>
-        <ul>
-            <li>Email: bbdhuri@ybit.ac.in</li>
-            <li>Website: <a href="https://www.bhaskardhuri.dev">www.bhaskardhuri.dev</a></li>
-            <li>LinkedIn: <a href="https://www.linkedin.com/in/bhaskardhuri">linkedin.com/in/bhaskardhuri</a></li>
-        </ul>
-    </section>
+                <div class="code-content">
+                    <!-- Basic Profile Code -->
+                    <div class="code-block active" id="basic-code">
+                        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Personal Profile&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Header Section --&gt;
+    &lt;header&gt;
+        &lt;h1&gt;John Doe&lt;/h1&gt;
+        &lt;p&gt;Web Developer | Designer | Technology Enthusiast&lt;/p&gt;
+    &lt;/header&gt;
 
-    <footer>
-        <p>&copy; 2025 Bhaskar Dhuri</p>
-    </footer>
+    &lt;!-- About Me Section --&gt;
+    &lt;section&gt;
+        &lt;h2&gt;About Me&lt;/h2&gt;
+        &lt;p&gt;Hello! I'm John Doe, a passionate web developer with a focus on 
+           building modern, user-friendly websites and applications. I love 
+           learning new technologies and solving real-world problems with code.&lt;/p&gt;
+    &lt;/section&gt;
 
+    &lt;!-- Skills Section with Lists --&gt;
+    &lt;section&gt;
+        &lt;h2&gt;Technical Skills&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li&gt;HTML5 &amp; CSS3&lt;/li&gt;
+            &lt;li&gt;JavaScript (ES6+)&lt;/li&gt;
+            &lt;li&gt;React.js &amp; Node.js&lt;/li&gt;
+            &lt;li&gt;Python &amp; Django&lt;/li&gt;
+            &lt;li&gt;Git &amp; GitHub&lt;/li&gt;
+            &lt;li&gt;Responsive Web Design&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Education Table --&gt;
+    &lt;section&gt;
+        &lt;h2&gt;Education&lt;/h2&gt;
+        &lt;table border="1" cellpadding="10" cellspacing="0"&gt;
+            &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;Degree&lt;/th&gt;
+                    &lt;th&gt;Institution&lt;/th&gt;
+                    &lt;th&gt;Year&lt;/th&gt;
+                    &lt;th&gt;Grade&lt;/th&gt;
+                &lt;/tr&gt;
+            &lt;/thead&gt;
+            &lt;tbody&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Bachelor's in Computer Science&lt;/td&gt;
+                    &lt;td&gt;Tech University&lt;/td&gt;
+                    &lt;td&gt;2020-2024&lt;/td&gt;
+                    &lt;td&gt;8.5 CGPA&lt;/td&gt;
+                &lt;/tr&gt;
+                &lt;tr&gt;
+                    &lt;td&gt;Higher Secondary&lt;/td&gt;
+                    &lt;td&gt;Science College&lt;/td&gt;
+                    &lt;td&gt;2018-2020&lt;/td&gt;
+                    &lt;td&gt;92%&lt;/td&gt;
+                &lt;/tr&gt;
+            &lt;/tbody&gt;
+        &lt;/table&gt;
+    &lt;/section&gt;
+
+    &lt;!-- Contact Section with Links --&gt;
+    &lt;section&gt;
+        &lt;h2&gt;Contact Information&lt;/h2&gt;
+        &lt;ul&gt;
+            &lt;li&gt;Email: &lt;a href="mailto:john@example.com"&gt;john@example.com&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;Website: &lt;a href="https://johndoe.dev" target="_blank"&gt;johndoe.dev&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;LinkedIn: &lt;a href="https://linkedin.com/in/johndoe" target="_blank"&gt;linkedin.com/in/johndoe&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;GitHub: &lt;a href="https://github.com/johndoe" target="_blank"&gt;github.com/johndoe&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+
+                    <!-- Semantic HTML5 Code -->
+                    <div class="code-block" id="semantic-code">
+                        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Semantic HTML5 Profile&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Main Header --&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Jane Smith&lt;/h1&gt;
+        &lt;p&gt;Full-Stack Developer &amp; UI/UX Designer&lt;/p&gt;
+        
+        &lt;!-- Navigation Menu --&gt;
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#skills"&gt;Skills&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Main Content --&gt;
+    &lt;main&gt;
+        &lt;!-- About Section --&gt;
+        &lt;section id="about"&gt;
+            &lt;h2&gt;About Me&lt;/h2&gt;
+            &lt;article&gt;
+                &lt;p&gt;I'm a passionate full-stack developer with 5+ years of experience 
+                   creating digital solutions that make a difference. I specialize in 
+                   modern web technologies and user-centered design.&lt;/p&gt;
+                
+                &lt;h3&gt;Professional Summary&lt;/h3&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;5+ years in web development&lt;/li&gt;
+                    &lt;li&gt;Expert in React, Node.js, and Python&lt;/li&gt;
+                    &lt;li&gt;Strong background in UI/UX design&lt;/li&gt;
+                    &lt;li&gt;Experience with cloud platforms (AWS, Azure)&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/article&gt;
+        &lt;/section&gt;
+
+        &lt;!-- Skills Section --&gt;
+        &lt;section id="skills"&gt;
+            &lt;h2&gt;Technical Skills&lt;/h2&gt;
+            
+            &lt;h3&gt;Frontend Technologies&lt;/h3&gt;
+            &lt;ol&gt;
+                &lt;li&gt;HTML5 &amp; CSS3&lt;/li&gt;
+                &lt;li&gt;JavaScript (ES6+)&lt;/li&gt;
+                &lt;li&gt;React.js &amp; Vue.js&lt;/li&gt;
+                &lt;li&gt;TypeScript&lt;/li&gt;
+                &lt;li&gt;Sass &amp; Tailwind CSS&lt;/li&gt;
+            &lt;/ol&gt;
+            
+            &lt;h3&gt;Backend Technologies&lt;/h3&gt;
+            &lt;ol&gt;
+                &lt;li&gt;Node.js &amp; Express&lt;/li&gt;
+                &lt;li&gt;Python &amp; Django&lt;/li&gt;
+                &lt;li&gt;PostgreSQL &amp; MongoDB&lt;/li&gt;
+                &lt;li&gt;RESTful APIs &amp; GraphQL&lt;/li&gt;
+                &lt;li&gt;Docker &amp; Kubernetes&lt;/li&gt;
+            &lt;/ol&gt;
+        &lt;/section&gt;
+
+        &lt;!-- Projects Table --&gt;
+        &lt;section id="projects"&gt;
+            &lt;h2&gt;Recent Projects&lt;/h2&gt;
+            &lt;table border="1" cellpadding="12" cellspacing="0"&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Project Name&lt;/th&gt;
+                        &lt;th&gt;Technology Stack&lt;/th&gt;
+                        &lt;th&gt;Duration&lt;/th&gt;
+                        &lt;th&gt;Status&lt;/th&gt;
+                        &lt;th&gt;Link&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;E-commerce Platform&lt;/td&gt;
+                        &lt;td&gt;React, Node.js, MongoDB&lt;/td&gt;
+                        &lt;td&gt;3 months&lt;/td&gt;
+                        &lt;td&gt;Completed&lt;/td&gt;
+                        &lt;td&gt;&lt;a href="#" target="_blank"&gt;View Demo&lt;/a&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;Task Management App&lt;/td&gt;
+                        &lt;td&gt;Vue.js, Python, PostgreSQL&lt;/td&gt;
+                        &lt;td&gt;2 months&lt;/td&gt;
+                        &lt;td&gt;In Progress&lt;/td&gt;
+                        &lt;td&gt;&lt;a href="#" target="_blank"&gt;View Demo&lt;/a&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;Portfolio Website&lt;/td&gt;
+                        &lt;td&gt;HTML5, CSS3, JavaScript&lt;/td&gt;
+                        &lt;td&gt;1 month&lt;/td&gt;
+                        &lt;td&gt;Completed&lt;/td&gt;
+                        &lt;td&gt;&lt;a href="#" target="_blank"&gt;Live Site&lt;/a&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;!-- Sidebar --&gt;
+    &lt;aside&gt;
+        &lt;h3&gt;Quick Facts&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;📍 Location: San Francisco, CA&lt;/li&gt;
+            &lt;li&gt;🎓 Education: MS Computer Science&lt;/li&gt;
+            &lt;li&gt;💼 Experience: 5+ years&lt;/li&gt;
+            &lt;li&gt;🌟 Projects Completed: 50+&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/aside&gt;
+
+    &lt;!-- Footer --&gt;
+    &lt;footer id="contact"&gt;
+        &lt;h2&gt;Contact Information&lt;/h2&gt;
+        &lt;address&gt;
+            &lt;p&gt;Email: &lt;a href="mailto:jane@example.com"&gt;jane@example.com&lt;/a&gt;&lt;/p&gt;
+            &lt;p&gt;Phone: &lt;a href="tel:+1234567890"&gt;+1 (234) 567-8900&lt;/a&gt;&lt;/p&gt;
+            &lt;p&gt;Website: &lt;a href="https://janesmith.dev" target="_blank"&gt;janesmith.dev&lt;/a&gt;&lt;/p&gt;
+        &lt;/address&gt;
+        
+        &lt;h3&gt;Social Media&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="https://linkedin.com/in/janesmith" target="_blank"&gt;LinkedIn&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://github.com/janesmith" target="_blank"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://twitter.com/janesmith" target="_blank"&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+
+                    <!-- Advanced Profile Code -->
+                    <div class="code-block" id="advanced-code">
+                        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Advanced Personal Profile&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Alex Johnson&lt;/h1&gt;
+        &lt;p&gt;Senior Software Engineer &amp; Team Lead&lt;/p&gt;
+        
+        &lt;nav&gt;
+            &lt;ul&gt;
+                &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#experience"&gt;Experience&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#skills"&gt;Skills&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#education"&gt;Education&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;section id="about"&gt;
+            &lt;h2&gt;Professional Summary&lt;/h2&gt;
+            &lt;article&gt;
+                &lt;p&gt;Experienced software engineer with 8+ years in full-stack development, 
+                   team leadership, and system architecture. Passionate about creating 
+                   scalable solutions and mentoring junior developers.&lt;/p&gt;
+                
+                &lt;h3&gt;Core Competencies&lt;/h3&gt;
+                &lt;ol&gt;
+                    &lt;li&gt;Full-Stack Web Development&lt;/li&gt;
+                    &lt;li&gt;System Architecture &amp; Design&lt;/li&gt;
+                    &lt;li&gt;Team Leadership &amp; Mentoring&lt;/li&gt;
+                    &lt;li&gt;DevOps &amp; Cloud Infrastructure&lt;/li&gt;
+                    &lt;li&gt;Agile Development Methodologies&lt;/li&gt;
+                &lt;/ol&gt;
+            &lt;/article&gt;
+        &lt;/section&gt;
+
+        &lt;section id="experience"&gt;
+            &lt;h2&gt;Work Experience&lt;/h2&gt;
+            &lt;table&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Position&lt;/th&gt;
+                        &lt;th&gt;Company&lt;/th&gt;
+                        &lt;th&gt;Duration&lt;/th&gt;
+                        &lt;th&gt;Key Achievements&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;Senior Software Engineer&lt;/td&gt;
+                        &lt;td&gt;TechCorp Inc.&lt;/td&gt;
+                        &lt;td&gt;2021 - Present&lt;/td&gt;
+                        &lt;td&gt;Led team of 6 developers, improved system performance by 40%&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;Full-Stack Developer&lt;/td&gt;
+                        &lt;td&gt;StartupXYZ&lt;/td&gt;
+                        &lt;td&gt;2019 - 2021&lt;/td&gt;
+                        &lt;td&gt;Built MVP from scratch, scaled to 10K+ users&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;Junior Developer&lt;/td&gt;
+                        &lt;td&gt;WebSolutions Ltd.&lt;/td&gt;
+                        &lt;td&gt;2017 - 2019&lt;/td&gt;
+                        &lt;td&gt;Developed 15+ client websites, learned modern frameworks&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/section&gt;
+
+        &lt;section id="skills"&gt;
+            &lt;h2&gt;Technical Skills&lt;/h2&gt;
+            
+            &lt;h3&gt;Programming Languages&lt;/h3&gt;
+            &lt;ul&gt;
+                &lt;li&gt;JavaScript (Expert)&lt;/li&gt;
+                &lt;li&gt;Python (Advanced)&lt;/li&gt;
+                &lt;li&gt;TypeScript (Advanced)&lt;/li&gt;
+                &lt;li&gt;Java (Intermediate)&lt;/li&gt;
+                &lt;li&gt;Go (Beginner)&lt;/li&gt;
+            &lt;/ul&gt;
+            
+            &lt;h3&gt;Frameworks &amp; Libraries&lt;/h3&gt;
+            &lt;ul&gt;
+                &lt;li&gt;React.js &amp; Next.js&lt;/li&gt;
+                &lt;li&gt;Node.js &amp; Express&lt;/li&gt;
+                &lt;li&gt;Django &amp; FastAPI&lt;/li&gt;
+                &lt;li&gt;Vue.js &amp; Nuxt.js&lt;/li&gt;
+                &lt;li&gt;Angular (Legacy projects)&lt;/li&gt;
+            &lt;/ul&gt;
+            
+            &lt;h3&gt;Tools &amp; Technologies&lt;/h3&gt;
+            &lt;ol&gt;
+                &lt;li&gt;Docker &amp; Kubernetes&lt;/li&gt;
+                &lt;li&gt;AWS &amp; Google Cloud&lt;/li&gt;
+                &lt;li&gt;PostgreSQL &amp; MongoDB&lt;/li&gt;
+                &lt;li&gt;Redis &amp; Elasticsearch&lt;/li&gt;
+                &lt;li&gt;Git &amp; CI/CD Pipelines&lt;/li&gt;
+            &lt;/ol&gt;
+        &lt;/section&gt;
+
+        &lt;section id="education"&gt;
+            &lt;h2&gt;Education &amp; Certifications&lt;/h2&gt;
+            &lt;table&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Qualification&lt;/th&gt;
+                        &lt;th&gt;Institution&lt;/th&gt;
+                        &lt;th&gt;Year&lt;/th&gt;
+                        &lt;th&gt;Grade/Score&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;M.S. Computer Science&lt;/td&gt;
+                        &lt;td&gt;Stanford University&lt;/td&gt;
+                        &lt;td&gt;2015-2017&lt;/td&gt;
+                        &lt;td&gt;3.8 GPA&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;B.Tech Computer Engineering&lt;/td&gt;
+                        &lt;td&gt;MIT&lt;/td&gt;
+                        &lt;td&gt;2011-2015&lt;/td&gt;
+                        &lt;td&gt;3.7 GPA&lt;/td&gt;
+                    &lt;/tr&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;AWS Solutions Architect&lt;/td&gt;
+                        &lt;td&gt;Amazon Web Services&lt;/td&gt;
+                        &lt;td&gt;2022&lt;/td&gt;
+                        &lt;td&gt;Certified&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;aside&gt;
+        &lt;h3&gt;Quick Stats&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;🏢 Current Role: Senior Software Engineer&lt;/li&gt;
+            &lt;li&gt;📍 Location: Seattle, WA&lt;/li&gt;
+            &lt;li&gt;💼 Experience: 8+ years&lt;/li&gt;
+            &lt;li&gt;👥 Team Size: 6 developers&lt;/li&gt;
+            &lt;li&gt;🚀 Projects Led: 12+&lt;/li&gt;
+            &lt;li&gt;🎯 Success Rate: 95%&lt;/li&gt;
+        &lt;/ul&gt;
+        
+        &lt;h3&gt;Achievements&lt;/h3&gt;
+        &lt;ol&gt;
+            &lt;li&gt;Employee of the Year 2023&lt;/li&gt;
+            &lt;li&gt;Led successful system migration&lt;/li&gt;
+            &lt;li&gt;Mentored 10+ junior developers&lt;/li&gt;
+            &lt;li&gt;Speaker at 3 tech conferences&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/aside&gt;
+
+    &lt;footer id="contact"&gt;
+        &lt;h2&gt;Get In Touch&lt;/h2&gt;
+        &lt;address&gt;
+            &lt;p&gt;📧 Email: &lt;a href="mailto:alex@example.com"&gt;alex@example.com&lt;/a&gt;&lt;/p&gt;
+            &lt;p&gt;📱 Phone: &lt;a href="tel:+1234567890"&gt;+1 (234) 567-8900&lt;/a&gt;&lt;/p&gt;
+            &lt;p&gt;🌐 Website: &lt;a href="https://alexjohnson.dev" target="_blank"&gt;alexjohnson.dev&lt;/a&gt;&lt;/p&gt;
+        &lt;/address&gt;
+        
+        &lt;h3&gt;Professional Networks&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="https://linkedin.com/in/alexjohnson" target="_blank"&gt;LinkedIn Profile&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://github.com/alexjohnson" target="_blank"&gt;GitHub Portfolio&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://stackoverflow.com/users/alexjohnson" target="_blank"&gt;Stack Overflow&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="https://medium.com/@alexjohnson" target="_blank"&gt;Medium Blog&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+
+                    <!-- Styled Profile Code -->
+                    <div class="code-block" id="styled-code">
+                        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Styled Personal Profile&lt;/title&gt;
+    &lt;style&gt;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        nav li {
+            margin: 0 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        main {
+            padding: 2rem;
+        }
+        
+        section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        ul, ol {
+            margin-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        aside {
+            background: #e9ecef;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        
+        footer {
+            background: #343a40;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        footer h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        footer a {
+            color: #667eea;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .skill-category {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav li {
+                margin: 0.25rem 0;
+            }
+            
+            .container {
+                margin: 1rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;header&gt;
+            &lt;h1&gt;Sarah Wilson&lt;/h1&gt;
+            &lt;p&gt;Creative Frontend Developer &amp; UI Designer&lt;/p&gt;
+            
+            &lt;nav&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#skills"&gt;Skills&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#projects"&gt;Projects&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#education"&gt;Education&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/nav&gt;
+        &lt;/header&gt;
+
+        &lt;main&gt;
+            &lt;section id="about"&gt;
+                &lt;h2&gt;About Me&lt;/h2&gt;
+                &lt;p&gt;I'm a passionate frontend developer with a keen eye for design and 
+                   user experience. With 4+ years of experience, I specialize in creating 
+                   beautiful, responsive, and user-friendly web applications.&lt;/p&gt;
+                
+                &lt;h3&gt;What I Do&lt;/h3&gt;
+                &lt;ul&gt;
+                    &lt;li&gt;Frontend Development with modern frameworks&lt;/li&gt;
+                    &lt;li&gt;UI/UX Design and prototyping&lt;/li&gt;
+                    &lt;li&gt;Responsive web design&lt;/li&gt;
+                    &lt;li&gt;Performance optimization&lt;/li&gt;
+                    &lt;li&gt;Cross-browser compatibility&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/section&gt;
+
+            &lt;section id="skills"&gt;
+                &lt;h2&gt;Technical Skills&lt;/h2&gt;
+                &lt;div class="skills-grid"&gt;
+                    &lt;div class="skill-category"&gt;
+                        &lt;h3&gt;Frontend Technologies&lt;/h3&gt;
+                        &lt;ol&gt;
+                            &lt;li&gt;HTML5 &amp; CSS3&lt;/li&gt;
+                            &lt;li&gt;JavaScript (ES6+)&lt;/li&gt;
+                            &lt;li&gt;React.js &amp; Redux&lt;/li&gt;
+                            &lt;li&gt;Vue.js &amp; Vuex&lt;/li&gt;
+                            &lt;li&gt;TypeScript&lt;/li&gt;
+                        &lt;/ol&gt;
+                    &lt;/div&gt;
+                    
+                    &lt;div class="skill-category"&gt;
+                        &lt;h3&gt;Design &amp; Tools&lt;/h3&gt;
+                        &lt;ol&gt;
+                            &lt;li&gt;Figma &amp; Adobe XD&lt;/li&gt;
+                            &lt;li&gt;Sass &amp; Less&lt;/li&gt;
+                            &lt;li&gt;Bootstrap &amp; Tailwind&lt;/li&gt;
+                            &lt;li&gt;Webpack &amp; Vite&lt;/li&gt;
+                            &lt;li&gt;Git &amp; GitHub&lt;/li&gt;
+                        &lt;/ol&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/section&gt;
+
+            &lt;section id="projects"&gt;
+                &lt;h2&gt;Featured Projects&lt;/h2&gt;
+                &lt;table&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th&gt;Project&lt;/th&gt;
+                            &lt;th&gt;Description&lt;/th&gt;
+                            &lt;th&gt;Technologies&lt;/th&gt;
+                            &lt;th&gt;Status&lt;/th&gt;
+                            &lt;th&gt;Links&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;Weather App&lt;/td&gt;
+                            &lt;td&gt;Real-time weather application&lt;/td&gt;
+                            &lt;td&gt;React, API Integration&lt;/td&gt;
+                            &lt;td&gt;Completed&lt;/td&gt;
+                            &lt;td&gt;&lt;a href="#" target="_blank"&gt;Demo&lt;/a&gt; | &lt;a href="#" target="_blank"&gt;Code&lt;/a&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;Task Manager&lt;/td&gt;
+                            &lt;td&gt;Productivity application&lt;/td&gt;
+                            &lt;td&gt;Vue.js, Local Storage&lt;/td&gt;
+                            &lt;td&gt;Completed&lt;/td&gt;
+                            &lt;td&gt;&lt;a href="#" target="_blank"&gt;Demo&lt;/a&gt; | &lt;a href="#" target="_blank"&gt;Code&lt;/a&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;Portfolio Site&lt;/td&gt;
+                            &lt;td&gt;Personal portfolio website&lt;/td&gt;
+                            &lt;td&gt;HTML5, CSS3, JavaScript&lt;/td&gt;
+                            &lt;td&gt;Live&lt;/td&gt;
+                            &lt;td&gt;&lt;a href="#" target="_blank"&gt;Visit&lt;/a&gt; | &lt;a href="#" target="_blank"&gt;Code&lt;/a&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/section&gt;
+
+            &lt;section id="education"&gt;
+                &lt;h2&gt;Education &amp; Certifications&lt;/h2&gt;
+                &lt;table&gt;
+                    &lt;thead&gt;
+                        &lt;tr&gt;
+                            &lt;th&gt;Degree/Certification&lt;/th&gt;
+                            &lt;th&gt;Institution&lt;/th&gt;
+                            &lt;th&gt;Year&lt;/th&gt;
+                            &lt;th&gt;Grade&lt;/th&gt;
+                        &lt;/tr&gt;
+                    &lt;/thead&gt;
+                    &lt;tbody&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;B.S. Computer Science&lt;/td&gt;
+                            &lt;td&gt;University of Technology&lt;/td&gt;
+                            &lt;td&gt;2018-2022&lt;/td&gt;
+                            &lt;td&gt;3.8 GPA&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;Frontend Developer Certification&lt;/td&gt;
+                            &lt;td&gt;freeCodeCamp&lt;/td&gt;
+                            &lt;td&gt;2022&lt;/td&gt;
+                            &lt;td&gt;Certified&lt;/td&gt;
+                        &lt;/tr&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;React Developer Certification&lt;/td&gt;
+                            &lt;td&gt;Meta (Facebook)&lt;/td&gt;
+                            &lt;td&gt;2023&lt;/td&gt;
+                            &lt;td&gt;Certified&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/tbody&gt;
+                &lt;/table&gt;
+            &lt;/section&gt;
+        &lt;/main&gt;
+
+        &lt;aside&gt;
+            &lt;h3&gt;Quick Info&lt;/h3&gt;
+            &lt;ul&gt;
+                &lt;li&gt;🎯 Specialization: Frontend Development&lt;/li&gt;
+                &lt;li&gt;📍 Location: Austin, TX&lt;/li&gt;
+                &lt;li&gt;💼 Experience: 4+ years&lt;/li&gt;
+                &lt;li&gt;🏆 Projects: 25+ completed&lt;/li&gt;
+                &lt;li&gt;🎨 Design Tools: Figma, Adobe XD&lt;/li&gt;
+                &lt;li&gt;☕ Fun Fact: Coffee enthusiast&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/aside&gt;
+
+        &lt;footer id="contact"&gt;
+            &lt;h2&gt;Let's Connect&lt;/h2&gt;
+            &lt;address&gt;
+                &lt;p&gt;📧 &lt;a href="mailto:sarah@example.com"&gt;sarah@example.com&lt;/a&gt;&lt;/p&gt;
+                &lt;p&gt;📱 &lt;a href="tel:+1234567890"&gt;+1 (234) 567-8900&lt;/a&gt;&lt;/p&gt;
+                &lt;p&gt;🌐 &lt;a href="https://sarahwilson.dev" target="_blank"&gt;sarahwilson.dev&lt;/a&gt;&lt;/p&gt;
+            &lt;/address&gt;
+            
+            &lt;h3&gt;Find Me Online&lt;/h3&gt;
+            &lt;ul style="list-style: none; display: flex; justify-content: center; gap: 2rem;"&gt;
+                &lt;li&gt;&lt;a href="https://linkedin.com/in/sarahwilson" target="_blank"&gt;LinkedIn&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://github.com/sarahwilson" target="_blank"&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://dribbble.com/sarahwilson" target="_blank"&gt;Dribbble&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="https://behance.net/sarahwilson" target="_blank"&gt;Behance&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/footer&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="output-section">
+                <div class="output-header">
+                    <h3><i class="fas fa-eye"></i> Live Preview</h3>
+                    <div class="preview-controls">
+                        <button class="run-btn" onclick="previewCode()">
+                            <i class="fas fa-play"></i> Preview
+                        </button>
+                        <button class="open-btn" onclick="openInNewTab()">
+                            <i class="fas fa-external-link-alt"></i> Open in New Tab
+                        </button>
+                    </div>
+                </div>
+                <div class="output-content">
+                    <div class="output-display" id="outputDisplay">
+                        <iframe class="preview-frame" id="previewFrame" src="about:blank"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentCode = 'basic';
+
+        function showCode(codeType) {
+            // Hide all code blocks
+            document.querySelectorAll('.code-block').forEach(block => {
+                block.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected code block
+            document.getElementById(codeType + '-code').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            currentCode = codeType;
+        }
+
+        function copyCode() {
+            const activeCodeBlock = document.querySelector('.code-block.active pre code');
+            const text = activeCodeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const copyBtn = document.querySelector('.copy-btn');
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.style.background = 'rgba(16, 185, 129, 0.3)';
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+                }, 2000);
+            });
+        }
+
+        function previewCode() {
+            const activeCodeBlock = document.querySelector('.code-block.active pre code');
+            const htmlCode = activeCodeBlock.textContent;
+            const previewFrame = document.getElementById('previewFrame');
+            
+            // Create a blob with the HTML content
+            const blob = new Blob([htmlCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            // Set the iframe source to the blob URL
+            previewFrame.src = url;
+            
+            // Show loading state
+            const runBtn = document.querySelector('.run-btn');
+            const originalText = runBtn.innerHTML;
+            runBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            runBtn.disabled = true;
+            
+            // Reset button after a short delay
+            setTimeout(() => {
+                runBtn.innerHTML = originalText;
+                runBtn.disabled = false;
+            }, 1000);
+        }
+
+        function openInNewTab() {
+            const activeCodeBlock = document.querySelector('.code-block.active pre code');
+            const htmlCode = activeCodeBlock.textContent;
+            
+            // Create a new window/tab with the HTML content
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(htmlCode);
+            newWindow.document.close();
+            
+            // Show success feedback
+            const openBtn = document.querySelector('.open-btn');
+            const originalText = openBtn.innerHTML;
+            openBtn.innerHTML = '<i class="fas fa-check"></i> Opened!';
+            openBtn.style.background = '#10b981';
+            
+            setTimeout(() => {
+                openBtn.innerHTML = originalText;
+                openBtn.style.background = '#8b5cf6';
+            }, 2000);
+        }
+
+        // Initialize with basic profile preview
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                previewCode();
+            }, 500);
+        });
+    </script>
 </body>
 </html>

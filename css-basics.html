@@ -1,0 +1,822 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Tutorial - Learn CSS Step by Step</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+            position: sticky;
+            top: 0;
+        }
+
+        .sidebar-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            background: #f8fafc;
+        }
+
+        .sidebar-header h3 {
+            color: #1e293b;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tutorial-section {
+            padding: 1rem 0;
+        }
+
+        .section-title {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #f1f5f9;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #475569;
+            text-decoration: none;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: #f1f5f9;
+            color: #6366f1;
+            border-left-color: #6366f1;
+        }
+
+        .nav-item.active {
+            background: #eff6ff;
+            color: #2563eb;
+            border-left-color: #2563eb;
+            font-weight: 500;
+        }
+
+        .content {
+            flex: 1;
+            padding: 2rem;
+            background: white;
+            overflow-y: auto;
+        }
+
+        .module {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .module.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module h1 {
+            color: #1e293b;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .module h2 {
+            color: #374151;
+            font-size: 1.6rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .module h3 {
+            color: #4b5563;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.75rem 0;
+            font-weight: 600;
+        }
+
+        .module p {
+            margin-bottom: 1rem;
+            color: #6b7280;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .example-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .example-header {
+            background: #1e293b;
+            color: white;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .example-content {
+            padding: 1.5rem;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 6px;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid #6366f1;
+        }
+
+        .try-it-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .try-it-btn:hover {
+            background: #059669;
+            transform: translateY(-1px);
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .nav-btn {
+            background: #6366f1;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
+
+        .nav-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+
+        .info-box.warning {
+            background: #fef3c7;
+            border-color: #fbbf24;
+            border-left-color: #f59e0b;
+        }
+
+        .info-box.success {
+            background: #ecfdf5;
+            border-color: #86efac;
+            border-left-color: #10b981;
+        }
+
+        .demo-result {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .property-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-table th,
+        .property-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .property-table th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .property-table tr:hover {
+            background: #f8fafc;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+            }
+            
+            .content {
+                padding: 1rem;
+            }
+            
+            .header-content {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1><i class="fab fa-css3-alt"></i> CSS Tutorial</h1>
+            <a href="javascript:window.close()" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-book"></i> CSS Tutorial</h3>
+            </div>
+
+            <div class="tutorial-section">
+                <div class="section-title">CSS Basics</div>
+                <button class="nav-item active" onclick="showModule('css-intro')">CSS Introduction</button>
+                <button class="nav-item" onclick="showModule('css-syntax')">CSS Syntax</button>
+                <button class="nav-item" onclick="showModule('css-selectors')">CSS Selectors</button>
+                <button class="nav-item" onclick="showModule('css-colors')">CSS Colors</button>
+                <button class="nav-item" onclick="showModule('css-backgrounds')">CSS Backgrounds</button>
+                <button class="nav-item" onclick="showModule('css-borders')">CSS Borders</button>
+                <button class="nav-item" onclick="showModule('css-margins')">CSS Margins</button>
+                <button class="nav-item" onclick="showModule('css-padding')">CSS Padding</button>
+            </div>
+
+            <div class="tutorial-section">
+                <div class="section-title">CSS Text</div>
+                <button class="nav-item" onclick="showModule('css-text')">CSS Text</button>
+                <button class="nav-item" onclick="showModule('css-fonts')">CSS Fonts</button>
+                <button class="nav-item" onclick="showModule('css-text-effects')">CSS Text Effects</button>
+            </div>
+
+            <div class="tutorial-section">
+                <div class="section-title">CSS Layout</div>
+                <button class="nav-item" onclick="showModule('css-box-model')">CSS Box Model</button>
+                <button class="nav-item" onclick="showModule('css-display')">CSS Display</button>
+                <button class="nav-item" onclick="showModule('css-position')">CSS Position</button>
+                <button class="nav-item" onclick="showModule('css-float')">CSS Float</button>
+                <button class="nav-item" onclick="showModule('css-flexbox')">CSS Flexbox</button>
+                <button class="nav-item" onclick="showModule('css-grid')">CSS Grid</button>
+            </div>
+
+            <div class="tutorial-section">
+                <div class="section-title">CSS Advanced</div>
+                <button class="nav-item" onclick="showModule('css-responsive')">CSS Responsive</button>
+                <button class="nav-item" onclick="showModule('css-animations')">CSS Animations</button>
+                <button class="nav-item" onclick="showModule('css-transforms')">CSS Transforms</button>
+                <button class="nav-item" onclick="showModule('css-variables')">CSS Variables</button>
+            </div>
+        </nav>
+
+        <main class="content">
+            <!-- CSS Introduction Module -->
+            <div class="module active" id="css-intro">
+                <h1>CSS Introduction</h1>
+                <p>CSS stands for Cascading Style Sheets. CSS describes how HTML elements are to be displayed on screen, paper, or in other media.</p>
+
+                <div class="info-box">
+                    <strong>What You Should Already Know</strong><br>
+                    Before studying CSS, you should have a basic knowledge of HTML.
+                </div>
+
+                <h2>What is CSS?</h2>
+                <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                    <li>CSS stands for Cascading Style Sheets</li>
+                    <li>CSS describes how HTML elements are to be displayed</li>
+                    <li>CSS saves a lot of work. It can control the layout of multiple web pages all at once</li>
+                    <li>External stylesheets are stored in CSS files</li>
+                </ul>
+
+                <h2>CSS Example</h2>
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> Example
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+}
+                        </div>
+                        <button class="try-it-btn">
+                            <i class="fas fa-play"></i> Try it Yourself
+                        </button>
+                    </div>
+                </div>
+
+                <h2>CSS Solved a Big Problem</h2>
+                <p>HTML was NEVER intended to contain tags for formatting a web page! HTML was created to describe the content of a web page.</p>
+                <p>When tags like &lt;font&gt;, and color attributes were added to the HTML 3.2 specification, it started a nightmare for web developers. Development of large websites, where fonts and color information were added to every single page, became a long and expensive process.</p>
+
+                <div class="navigation-buttons">
+                    <button class="nav-btn" disabled>
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button class="nav-btn" onclick="showModule('css-syntax')">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CSS Syntax Module -->
+            <div class="module" id="css-syntax">
+                <h1>CSS Syntax</h1>
+                <p>A CSS rule consists of a selector and a declaration block.</p>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> CSS Syntax
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+selector {
+  property: value;
+  property: value;
+}
+                        </div>
+                    </div>
+                </div>
+
+                <h2>CSS Selector</h2>
+                <p>The selector points to the HTML element you want to style.</p>
+                <p>The declaration block contains one or more declarations separated by semicolons.</p>
+
+                <h2>Example Explained</h2>
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> Example
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+p {
+  color: red;
+  text-align: center;
+}
+                        </div>
+                        <div class="demo-result">
+                            <p style="color: red; text-align: center;">This paragraph will be red and center-aligned.</p>
+                        </div>
+                        <button class="try-it-btn">
+                            <i class="fas fa-play"></i> Try it Yourself
+                        </button>
+                    </div>
+                </div>
+
+                <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                    <li><code>p</code> is a selector in CSS (it points to the HTML element you want to style: &lt;p&gt;)</li>
+                    <li><code>color</code> is a property, and <code>red</code> is the property value</li>
+                    <li><code>text-align</code> is a property, and <code>center</code> is the property value</li>
+                </ul>
+
+                <div class="navigation-buttons">
+                    <button class="nav-btn" onclick="showModule('css-intro')">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button class="nav-btn" onclick="showModule('css-selectors')">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CSS Selectors Module -->
+            <div class="module" id="css-selectors">
+                <h1>CSS Selectors</h1>
+                <p>CSS selectors are used to "find" (or select) the HTML elements you want to style.</p>
+
+                <h2>CSS Selector Categories</h2>
+                <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                    <li>Simple selectors (select elements based on name, id, class)</li>
+                    <li>Combinator selectors (select elements based on a specific relationship between them)</li>
+                    <li>Pseudo-class selectors (select elements based on a certain state)</li>
+                    <li>Pseudo-elements selectors (select and style a part of an element)</li>
+                    <li>Attribute selectors (select elements based on an attribute or attribute value)</li>
+                </ul>
+
+                <h2>The CSS Element Selector</h2>
+                <p>The element selector selects HTML elements based on the element name.</p>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> Example
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+p {
+  text-align: center;
+  color: red;
+}
+                        </div>
+                        <button class="try-it-btn">
+                            <i class="fas fa-play"></i> Try it Yourself
+                        </button>
+                    </div>
+                </div>
+
+                <h2>The CSS ID Selector</h2>
+                <p>The id selector uses the id attribute of an HTML element to select a specific element.</p>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> Example
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+#para1 {
+  text-align: center;
+  color: red;
+}
+                        </div>
+                        <button class="try-it-btn">
+                            <i class="fas fa-play"></i> Try it Yourself
+                        </button>
+                    </div>
+                </div>
+
+                <h2>The CSS Class Selector</h2>
+                <p>The class selector selects HTML elements with a specific class attribute.</p>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> Example
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+.center {
+  text-align: center;
+  color: red;
+}
+                        </div>
+                        <button class="try-it-btn">
+                            <i class="fas fa-play"></i> Try it Yourself
+                        </button>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-btn" onclick="showModule('css-syntax')">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button class="nav-btn" onclick="showModule('css-colors')">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CSS Colors Module -->
+            <div class="module" id="css-colors">
+                <h1>CSS Colors</h1>
+                <p>Colors are specified using predefined color names, or RGB, HEX, HSL, RGBA, HSLA values.</p>
+
+                <h2>CSS Color Names</h2>
+                <p>In CSS, a color can be specified by using a predefined color name:</p>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> Example
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+h1 {
+  color: Tomato;
+}
+
+p {
+  color: DodgerBlue;
+}
+                        </div>
+                        <div class="demo-result">
+                            <h1 style="color: Tomato;">Hello World</h1>
+                            <p style="color: DodgerBlue;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                        <button class="try-it-btn">
+                            <i class="fas fa-play"></i> Try it Yourself
+                        </button>
+                    </div>
+                </div>
+
+                <h2>CSS RGB Colors</h2>
+                <p>An RGB color value represents RED, GREEN, and BLUE light sources.</p>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> Example
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+h1 {
+  color: rgb(255, 99, 71);
+}
+
+p {
+  color: rgb(30, 144, 255);
+}
+                        </div>
+                        <button class="try-it-btn">
+                            <i class="fas fa-play"></i> Try it Yourself
+                        </button>
+                    </div>
+                </div>
+
+                <h2>CSS HEX Colors</h2>
+                <p>A hexadecimal color is specified with: #RRGGBB, where the RR (red), GG (green) and BB (blue) hexadecimal integers specify the components of the color.</p>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> Example
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+h1 {
+  color: #ff6347;
+}
+
+p {
+  color: #1e90ff;
+}
+                        </div>
+                        <button class="try-it-btn">
+                            <i class="fas fa-play"></i> Try it Yourself
+                        </button>
+                    </div>
+                </div>
+
+                <div class="navigation-buttons">
+                    <button class="nav-btn" onclick="showModule('css-selectors')">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button class="nav-btn" onclick="showModule('css-backgrounds')">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add more modules here following the same pattern -->
+            <!-- For brevity, I'll add a few more key modules -->
+
+            <!-- CSS Flexbox Module -->
+            <div class="module" id="css-flexbox">
+                <h1>CSS Flexbox</h1>
+                <p>The Flexible Box Layout Module, makes it easier to design flexible responsive layout structure without using float or positioning.</p>
+
+                <h2>Flexbox Elements</h2>
+                <p>To start using the Flexbox model, you need to first define a flex container.</p>
+
+                <div class="example-box">
+                    <div class="example-header">
+                        <i class="fas fa-code"></i> Example
+                    </div>
+                    <div class="example-content">
+                        <div class="code-block">
+.flex-container {
+  display: flex;
+}
+                        </div>
+                        <button class="try-it-btn">
+                            <i class="fas fa-play"></i> Try it Yourself
+                        </button>
+                    </div>
+                </div>
+
+                <h2>Flex Container Properties</h2>
+                <table class="property-table">
+                    <tr>
+                        <th>Property</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>flex-direction</td>
+                        <td>Defines in which direction the container wants to stack the flex items</td>
+                    </tr>
+                    <tr>
+                        <td>flex-wrap</td>
+                        <td>Defines whether the flex items should wrap or not</td>
+                    </tr>
+                    <tr>
+                        <td>justify-content</td>
+                        <td>Used to align the flex items horizontally</td>
+                    </tr>
+                    <tr>
+                        <td>align-items</td>
+                        <td>Used to align the flex items vertically</td>
+                    </tr>
+                </table>
+
+                <div class="navigation-buttons">
+                    <button class="nav-btn" onclick="showModule('css-float')">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button class="nav-btn" onclick="showModule('css-grid')">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Placeholder modules for other topics -->
+            <div class="module" id="css-backgrounds">
+                <h1>CSS Backgrounds</h1>
+                <p>The CSS background properties are used to add background effects for elements.</p>
+                <!-- Add content here -->
+                <div class="navigation-buttons">
+                    <button class="nav-btn" onclick="showModule('css-colors')">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <button class="nav-btn" onclick="showModule('css-borders')">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add more modules as needed -->
+        </main>
+    </div>
+
+    <script>
+        function showModule(moduleId) {
+            // Hide all modules
+            const modules = document.querySelectorAll('.module');
+            modules.forEach(module => {
+                module.classList.remove('active');
+            });
+            
+            // Show selected module
+            const targetModule = document.getElementById(moduleId);
+            if (targetModule) {
+                targetModule.classList.add('active');
+            }
+            
+            // Update navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked nav item
+            event.target.classList.add('active');
+            
+            // Scroll to top of content
+            document.querySelector('.content').scrollTop = 0;
+        }
+
+        // Initialize with first module
+        document.addEventListener('DOMContentLoaded', function() {
+            showModule('css-intro');
+        });
+    </script>
+</body>
+</html>

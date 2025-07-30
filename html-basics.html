@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Basics Tutorial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
+            border: 1px solid #e2e8f0;
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .sidebar h3 {
+            color: #6366f1;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .nav-item {
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(99, 102, 241, 0.05);
+            border-left-color: #6366f1;
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border-left-color: #4f46e5;
+        }
+
+        .content {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content h2 {
+            color: #6366f1;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .content h3 {
+            color: #1e293b;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: 'HTML';
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            background: #6366f1;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .tag-highlight {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+
+        .example-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .example-box h4 {
+            color: #6366f1;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tag-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tag-item:hover {
+            border-color: #6366f1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
+        }
+
+        .tag-item h4 {
+            color: #6366f1;
+            margin-bottom: 0.5rem;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1><i class="fab fa-html5"></i> HTML5 Basics Tutorial</h1>
+        <p>Complete guide to HTML5 tags, structure, and best practices</p>
+    </header>
+
+    <div class="container">
+        <nav class="sidebar">
+            <h3><i class="fas fa-list"></i> Tutorial Outline</h3>
+            <div class="nav-item active" onclick="showSection('introduction')">
+                <i class="fas fa-play-circle"></i> Introduction to HTML5
+            </div>
+            <div class="nav-item" onclick="showSection('structure')">
+                <i class="fas fa-sitemap"></i> HTML Document Structure
+            </div>
+            <div class="nav-item" onclick="showSection('semantic')">
+                <i class="fas fa-tags"></i> Semantic HTML5 Tags
+            </div>
+            <div class="nav-item" onclick="showSection('text')">
+                <i class="fas fa-font"></i> Text & Formatting Tags
+            </div>
+            <div class="nav-item" onclick="showSection('lists')">
+                <i class="fas fa-list-ul"></i> Lists & Navigation
+            </div>
+            <div class="nav-item" onclick="showSection('links')">
+                <i class="fas fa-link"></i> Links & Anchors
+            </div>
+            <div class="nav-item" onclick="showSection('tables')">
+                <i class="fas fa-table"></i> Tables & Data
+            </div>
+            <div class="nav-item" onclick="showSection('forms')">
+                <i class="fas fa-wpforms"></i> Forms & Input
+            </div>
+            <div class="nav-item" onclick="showSection('media')">
+                <i class="fas fa-photo-video"></i> Media Elements
+            </div>
+            <div class="nav-item" onclick="showSection('attributes')">
+                <i class="fas fa-cog"></i> Attributes & Properties
+            </div>
+        </nav>
+
+        <main class="content">
+            <button class="back-btn" onclick="window.close()">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+
+            <!-- Introduction Section -->
+            <section class="content-section active" id="introduction">
+                <h2>Introduction to HTML5</h2>
+                <p>HTML5 is the latest version of HyperText Markup Language, the standard markup language for creating web pages. It introduces new semantic elements, improved forms, and better multimedia support.</p>
+                
+                <h3>What is HTML5?</h3>
+                <ul>
+                    <li><strong>Semantic Elements:</strong> Better structure with meaningful tags</li>
+                    <li><strong>Multimedia Support:</strong> Native audio and video elements</li>
+                    <li><strong>Form Enhancements:</strong> New input types and validation</li>
+                    <li><strong>API Integration:</strong> Canvas, geolocation, and storage APIs</li>
+                </ul>
+
+                <div class="example-box">
+                    <h4>Basic HTML5 Document</h4>
+                    <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First HTML5 Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to HTML5!&lt;/h1&gt;
+    &lt;p&gt;This is a basic HTML5 document.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Document Structure Section -->
+            <section class="content-section" id="structure">
+                <h2>HTML Document Structure</h2>
+                <p>Every HTML5 document follows a specific structure with essential elements that define the document type, language, and metadata.</p>
+
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;!DOCTYPE html&gt;</span></h4>
+                        <p>Declares the document as HTML5. Must be the first line in your HTML document.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;html&gt;</span></h4>
+                        <p>Root element that contains all other HTML elements. Use lang attribute for language.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;head&gt;</span></h4>
+                        <p>Contains metadata about the document that isn't displayed on the page.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;body&gt;</span></h4>
+                        <p>Contains all visible content that appears on the web page.</p>
+                    </div>
+                </div>
+
+                <h3>Essential Head Elements</h3>
+                <div class="code-block">
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;meta name="description" content="Page description"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+                </div>
+            </section>
+
+            <!-- Semantic HTML5 Tags Section -->
+            <section class="content-section" id="semantic">
+                <h2>Semantic HTML5 Tags</h2>
+                <p>Semantic elements clearly describe their meaning to both the browser and developer, improving accessibility and SEO.</p>
+
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;header&gt;</span></h4>
+                        <p>Defines header content for a document or section. Usually contains navigation, logos, or introductory content.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;nav&gt;</span></h4>
+                        <p>Defines navigation links. Use for main site navigation, breadcrumbs, or table of contents.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;main&gt;</span></h4>
+                        <p>Defines the main content area. Should be unique and contain the primary content of the page.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;section&gt;</span></h4>
+                        <p>Defines a section in a document. Use for thematically related content with a heading.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;article&gt;</span></h4>
+                        <p>Defines independent, self-contained content like blog posts, news articles, or comments.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;aside&gt;</span></h4>
+                        <p>Defines content aside from main content. Use for sidebars, related links, or advertisements.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;footer&gt;</span></h4>
+                        <p>Defines footer content. Usually contains copyright, contact info, or related links.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;figure&gt;</span></h4>
+                        <p>Groups media content with its caption. Use with &lt;figcaption&gt; for images, diagrams, or code.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>Semantic Structure Example</h4>
+                    <div class="code-block">
+&lt;header&gt;
+    &lt;nav&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+    &lt;section&gt;
+        &lt;h2&gt;Welcome Section&lt;/h2&gt;
+        &lt;article&gt;
+            &lt;h3&gt;Article Title&lt;/h3&gt;
+            &lt;p&gt;Article content...&lt;/p&gt;
+        &lt;/article&gt;
+    &lt;/section&gt;
+    
+    &lt;aside&gt;
+        &lt;h3&gt;Related Links&lt;/h3&gt;
+        &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#"&gt;Link 1&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+    &lt;p&gt;&copy; 2025 My Website&lt;/p&gt;
+&lt;/footer&gt;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Text & Formatting Section -->
+            <section class="content-section" id="text">
+                <h2>Text & Formatting Tags</h2>
+                <p>HTML provides various tags for structuring and formatting text content with semantic meaning.</p>
+
+                <h3>Heading Tags</h3>
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;h1&gt; to &lt;h6&gt;</span></h4>
+                        <p>Define headings from most important (h1) to least important (h6). Use hierarchically.</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+&lt;h1&gt;Main Title&lt;/h1&gt;
+&lt;h2&gt;Section Title&lt;/h2&gt;
+&lt;h3&gt;Subsection Title&lt;/h3&gt;
+&lt;h4&gt;Sub-subsection Title&lt;/h4&gt;
+&lt;h5&gt;Minor Heading&lt;/h5&gt;
+&lt;h6&gt;Smallest Heading&lt;/h6&gt;
+                </div>
+
+                <h3>Text Formatting Tags</h3>
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;p&gt;</span></h4>
+                        <p>Defines a paragraph. Most common text container element.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;strong&gt;</span></h4>
+                        <p>Indicates strong importance. Usually displayed as bold text.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;em&gt;</span></h4>
+                        <p>Indicates emphasized text. Usually displayed as italic text.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;mark&gt;</span></h4>
+                        <p>Highlights text. Usually displayed with yellow background.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;small&gt;</span></h4>
+                        <p>Represents side comments or fine print. Displays smaller text.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;del&gt;</span></h4>
+                        <p>Represents deleted text. Usually displayed with strikethrough.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;ins&gt;</span></h4>
+                        <p>Represents inserted text. Usually displayed with underline.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;code&gt;</span></h4>
+                        <p>Represents computer code. Usually displayed in monospace font.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>Text Formatting Example</h4>
+                    <div class="code-block">
+&lt;p&gt;This is a &lt;strong&gt;strong&lt;/strong&gt; paragraph with &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;
+&lt;p&gt;Here's some &lt;mark&gt;highlighted&lt;/mark&gt; text and &lt;code&gt;inline code&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;This is fine print text.&lt;/small&gt;&lt;/p&gt;
+&lt;p&gt;Price: &lt;del&gt;$100&lt;/del&gt; &lt;ins&gt;$80&lt;/ins&gt;&lt;/p&gt;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lists Section -->
+            <section class="content-section" id="lists">
+                <h2>Lists & Navigation</h2>
+                <p>HTML provides different types of lists for organizing content in a structured way.</p>
+
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;ul&gt;</span></h4>
+                        <p>Unordered list. Creates a bulleted list of items.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;ol&gt;</span></h4>
+                        <p>Ordered list. Creates a numbered list of items.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;li&gt;</span></h4>
+                        <p>List item. Used inside ul or ol elements.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;dl&gt;</span></h4>
+                        <p>Description list. Groups terms with their descriptions.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;dt&gt;</span></h4>
+                        <p>Description term. Defines a term in a description list.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;dd&gt;</span></h4>
+                        <p>Description definition. Provides description for a term.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>List Examples</h4>
+                    <div class="code-block">
+&lt;!-- Unordered List --&gt;
+&lt;ul&gt;
+    &lt;li&gt;HTML&lt;/li&gt;
+    &lt;li&gt;CSS&lt;/li&gt;
+    &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Ordered List --&gt;
+&lt;ol&gt;
+    &lt;li&gt;Learn HTML&lt;/li&gt;
+    &lt;li&gt;Learn CSS&lt;/li&gt;
+    &lt;li&gt;Learn JavaScript&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;!-- Description List --&gt;
+&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;HyperText Markup Language&lt;/dd&gt;
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Cascading Style Sheets&lt;/dd&gt;
+&lt;/dl&gt;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Links Section -->
+            <section class="content-section" id="links">
+                <h2>Links & Anchors</h2>
+                <p>Links are fundamental to the web, allowing navigation between pages and sections.</p>
+
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;a&gt;</span></h4>
+                        <p>Anchor element. Creates hyperlinks to other pages, files, sections, or external resources.</p>
+                    </div>
+                </div>
+
+                <h3>Link Types & Attributes</h3>
+                <table class="attribute-table">
+                    <thead>
+                        <tr>
+                            <th>Link Type</th>
+                            <th>Attribute</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>External Link</td>
+                            <td><span class="attribute-name">href="URL"</span></td>
+                            <td>&lt;a href="https://example.com"&gt;Visit Site&lt;/a&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>Internal Link</td>
+                            <td><span class="attribute-name">href="page.html"</span></td>
+                            <td>&lt;a href="about.html"&gt;About Page&lt;/a&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>Section Link</td>
+                            <td><span class="attribute-name">href="#id"</span></td>
+                            <td>&lt;a href="#section1"&gt;Go to Section&lt;/a&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>Email Link</td>
+                            <td><span class="attribute-name">href="mailto:"</span></td>
+                            <td>&lt;a href="mailto:user@example.com"&gt;Email&lt;/a&gt;</td>
+                        </tr>
+                        <tr>
+                            <td>Phone Link</td>
+                            <td><span class="attribute-name">href="tel:"</span></td>
+                            <td>&lt;a href="tel:+1234567890"&gt;Call Us&lt;/a&gt;</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example-box">
+                    <h4>Complete Link Examples</h4>
+                    <div class="code-block">
+&lt;!-- External Link with New Tab --&gt;
+&lt;a href="https://www.example.com" target="_blank" rel="noopener"&gt;
+    Visit Example.com
+&lt;/a&gt;
+
+&lt;!-- Internal Navigation --&gt;
+&lt;a href="about.html"&gt;About Page&lt;/a&gt;
+
+&lt;!-- Section Jump Link --&gt;
+&lt;a href="#contact-section"&gt;Go to Contact Section&lt;/a&gt;
+
+&lt;!-- Email Link with Subject --&gt;
+&lt;a href="mailto:contact@example.com?subject=Hello"&gt;
+    Send Email
+&lt;/a&gt;
+
+&lt;!-- Download Link --&gt;
+&lt;a href="document.pdf" download="my-document.pdf"&gt;
+    Download PDF
+&lt;/a&gt;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tables Section -->
+            <section class="content-section" id="tables">
+                <h2>Tables & Data</h2>
+                <p>Tables are used to display tabular data in rows and columns with proper structure and semantics.</p>
+
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;table&gt;</span></h4>
+                        <p>Defines a table. Container for all table elements.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;thead&gt;</span></h4>
+                        <p>Groups header content in a table.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;tbody&gt;</span></h4>
+                        <p>Groups body content in a table.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;tfoot&gt;</span></h4>
+                        <p>Groups footer content in a table.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;tr&gt;</span></h4>
+                        <p>Defines a table row.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;th&gt;</span></h4>
+                        <p>Defines a header cell. Usually bold and centered.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;td&gt;</span></h4>
+                        <p>Defines a data cell. Contains table data.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;caption&gt;</span></h4>
+                        <p>Provides a table caption or title.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>Complete Table Example</h4>
+                    <div class="code-block">
+&lt;table&gt;
+    &lt;caption&gt;Student Grades&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Subject&lt;/th&gt;
+            &lt;th&gt;Grade&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;John Doe&lt;/td&gt;
+            &lt;td&gt;Math&lt;/td&gt;
+            &lt;td&gt;A&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Jane Smith&lt;/td&gt;
+            &lt;td&gt;Science&lt;/td&gt;
+            &lt;td&gt;B+&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;
+        &lt;tr&gt;
+            &lt;td colspan="2"&gt;Average&lt;/td&gt;
+            &lt;td&gt;A-&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tfoot&gt;
+&lt;/table&gt;
+                    </div>
+                </div>
+            </section>
+
+            <!-- Forms Section -->
+            <section class="content-section" id="forms">
+                <h2>Forms & Input</h2>
+                <p>Forms allow users to input data and interact with web applications through various input elements.</p>
+
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;form&gt;</span></h4>
+                        <p>Defines a form. Container for form elements with action and method attributes.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;input&gt;</span></h4>
+                        <p>Creates various input fields based on type attribute.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;textarea&gt;</span></h4>
+                        <p>Creates multi-line text input area.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;select&gt;</span></h4>
+                        <p>Creates dropdown selection list.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;option&gt;</span></h4>
+                        <p>Defines options within select element.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;label&gt;</span></h4>
+                        <p>Provides labels for form elements. Improves accessibility.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;button&gt;</span></h4>
+                        <p>Creates clickable buttons with various types.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;fieldset&gt;</span></h4>
+                        <p>Groups related form elements together.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>Complete Form Example</h4>
+                    <div class="code-block">
+ &lt;form action="/submit" method="post"&gt;<br>
+    &lt;fieldset&gt;
+        &lt;legend&gt;Personal Information&lt;/legend&gt;<br>
+        
+        &lt;label for="name"&gt;Name:&lt;/label&gt;<br>
+        &lt;input type="text" id="name" name="name" required&gt;<br><br>
+        
+        &lt;label for="email"&gt;Email:&lt;/label&gt;<br>
+        &lt;input type="email" id="email" name="email" required&gt;<br><br>
+        
+        &lt;label for="age"&gt;Age:&lt;/label&gt;<br>
+        &lt;input type="number" id="age" name="age" min="18" max="100"&gt;<br><br>
+        
+        &lt;label for="country"&gt;Country:&lt;/label&gt;<br>
+        &lt;select id="country" name="country"&gt;<br>
+            &lt;option value=""&gt;Select Country&lt;/option&gt;<br>
+            &lt;option value="us"&gt;United States&lt;/option&gt;<br>
+            &lt;option value="uk"&gt;United Kingdom&lt;/option&gt;<br>
+        &lt;/select&gt;<br><br>
+        
+        &lt;label for="message"&gt;Message:&lt;/label&gt;<br>
+        &lt;textarea id="message" name="message" rows="4"&gt;&lt;/textarea&gt;<br><br>
+        
+        &lt;button type="submit"&gt;Submit&lt;/button&gt;<br>
+    &lt;/fieldset&gt;&lt;form&gt;<br><br>
+                    </div>
+                </div>
+
+                <h3>HTML5 Input Types</h3>
+                <ul>
+                    <li><strong>text:</strong> Single-line text input</li>
+                    <li><strong>email:</strong> Email address input with validation</li>
+                    <li><strong>password:</strong> Password input (hidden text)</li>
+                    <li><strong>number:</strong> Numeric input with min/max</li>
+                    <li><strong>date:</strong> Date picker</li>
+                    <li><strong>time:</strong> Time picker</li>
+                    <li><strong>url:</strong> URL input with validation</li>
+                    <li><strong>tel:</strong> Telephone number input</li>
+                    <li><strong>search:</strong> Search input field</li>
+                    <li><strong>checkbox:</strong> Checkbox for multiple selections</li>
+                    <li><strong>radio:</strong> Radio button for single selection</li>
+                    <li><strong>file:</strong> File upload input</li>
+                </ul>
+            </section>
+
+            <!-- Media Section -->
+            <section class="content-section" id="media">
+                <h2>Media Elements</h2>
+                <p>HTML5 provides native support for multimedia content including images, audio, and video.</p>
+
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;img&gt;</span></h4>
+                        <p>Embeds images. Requires src and alt attributes for accessibility.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;audio&gt;</span></h4>
+                        <p>Embeds audio content with native browser controls.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;video&gt;</span></h4>
+                        <p>Embeds video content with native browser controls.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;source&gt;</span></h4>
+                        <p>Specifies multiple media resources for audio/video elements.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;track&gt;</span></h4>
+                        <p>Provides text tracks for video elements (subtitles, captions).</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;canvas&gt;</span></h4>
+                        <p>Provides drawing surface for graphics via JavaScript.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;svg&gt;</span></h4>
+                        <p>Embeds scalable vector graphics directly in HTML.</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4><span class="tag-highlight">&lt;iframe&gt;</span></h4>
+                        <p>Embeds another HTML document within current page.</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>Media Examples</h4>
+                    <div class="code-block">
+&lt;!-- Image --&gt;<br>
+&lt;img src="image.jpg" alt="Description" width="300" height="200"&gt; <br><br>
+
+&lt;!-- Audio --&gt;<br>
+&lt;audio controls&gt;<br>
+    &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+    &lt;source src="audio.ogg" type="audio/ogg"&gt;
+    Your browser does not support audio.
+    &lt;/audio&gt; <br><br>
+
+&lt;!-- Video --&gt; <br>
+&lt;video controls width="640" height="360"&gt;
+    &lt;source src="video.mp4" type="video/mp4"&gt;
+    &lt;source src="video.webm" type="video/webm"&gt;
+    &lt;track src="subtitles.vtt" kind="subtitles" srclang="en" label="English"&gt;
+    Your browser does not support video.
+&lt;/video&gt;<br><br>
+
+&lt;!-- Canvas --&gt;<br>
+&lt;canvas id="myCanvas" width="400" height="200"&gt;&lt;/canvas&gt;<br><br>
+
+&lt;!-- SVG --&gt;<br>
+&lt;svg width="100" height="100"&gt;
+    &lt;circle cx="50" cy="50" r="40" fill="blue" /&gt;
+&lt;/svg&gt;
+            </div>
+            </div>
+            </section>
+
+            <!-- Attributes Section -->
+            <section class="content-section" id="attributes">
+                <h2>Attributes & Properties</h2>
+                <p>HTML attributes provide additional information about elements and modify their behavior or appearance.</p>
+
+                <h3>Global Attributes</h3>
+                <p>These attributes can be used on any HTML element:</p>
+                <table class="attribute-table">
+                    <thead>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Purpose</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="attribute-name">id</span></td>
+                            <td>Unique identifier for the element</td>
+                            <td>id="main-content"</td>
+                        </tr>
+                        <tr>
+                            <td><span class="attribute-name">class</span></td>
+                            <td>CSS class names for styling</td>
+                            <td>class="button primary"</td>
+                        </tr>
+                        <tr>
+                            <td><span class="attribute-name">style</span></td>
+                            <td>Inline CSS styles</td>
+                            <td>style="color: red;"</td>
+                        </tr>
+                        <tr>
+                            <td><span class="attribute-name">title</span></td>
+                            <td>Additional information (tooltip)</td>
+                            <td>title="Click for more info"</td>
+                        </tr>
+                        <tr>
+                            <td><span class="attribute-name">lang</span></td>
+                            <td>Language of the element content</td>
+                            <td>lang="en"</td>
+                        </tr>
+                        <tr>
+                            <td><span class="attribute-name">data-*</span></td>
+                            <td>Custom data attributes</td>
+                            <td>data-user-id="123"</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Common Element-Specific Attributes</h3>
+                <div class="tag-list">
+                    <div class="tag-item">
+                        <h4>Link Attributes</h4>
+                        <p><strong>href:</strong> URL destination<br>
+                           <strong>target:</strong> Where to open link<br>
+                           <strong>download:</strong> Force download<br>
+                           <strong>rel:</strong> Relationship to current page</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4>Image Attributes</h4>
+                        <p><strong>src:</strong> Image source URL<br>
+                           <strong>alt:</strong> Alternative text<br>
+                           <strong>width/height:</strong> Dimensions<br>
+                           <strong>loading:</strong> Lazy loading behavior</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4>Form Attributes</h4>
+                        <p><strong>name:</strong> Form field name<br>
+                           <strong>value:</strong> Default value<br>
+                           <strong>placeholder:</strong> Hint text<br>
+                           <strong>required:</strong> Mandatory field</p>
+                    </div>
+                    <div class="tag-item">
+                        <h4>Table Attributes</h4>
+                        <p><strong>colspan:</strong> Span multiple columns<br>
+                           <strong>rowspan:</strong> Span multiple rows<br>
+                           <strong>scope:</strong> Header scope<br>
+                           <strong>headers:</strong> Associated headers</p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <h4>Attribute Examples</h4>
+                    <div class="code-block">
+&lt;!-- Global Attributes --&gt;
+&lt;div id="main-content" class="container highlight" 
+     title="Main content area" lang="en"&gt;
+    &lt;p data-user-id="123" data-role="admin"&gt;
+        User information with custom data
+    &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- Element-specific Attributes --&gt;
+&lt;img src="profile.jpg" alt="User profile photo" 
+     width="150" height="150" loading="lazy"&gt;
+
+&lt;input type="email" name="email" 
+       placeholder="Enter your email address" 
+       required autocomplete="email"&gt;
+
+&lt;a href="https://example.com" target="_blank" 
+   rel="noopener noreferrer"&gt;External Link&lt;/a&gt;
+
+&lt;!-- Table with Spanning --&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th colspan="2"&gt;Name&lt;/th&gt;
+        &lt;th rowspan="2"&gt;Age&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;First&lt;/td&gt;
+        &lt;td&gt;Last&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+                    </div>
+                </div>
+
+                <h3>Boolean Attributes</h3>
+                <p>Some attributes are boolean (true/false). Their presence indicates true:</p>
+                <ul>
+                    <li><strong>required:</strong> Form field is required</li>
+                    <li><strong>disabled:</strong> Element is disabled</li>
+                    <li><strong>readonly:</strong> Element is read-only</li>
+                    <li><strong>checked:</strong> Checkbox/radio is checked</li>
+                    <li><strong>selected:</strong> Option is selected</li>
+                    <li><strong>hidden:</strong> Element is hidden</li>
+                    <li><strong>multiple:</strong> Multiple selections allowed</li>
+                    <li><strong>autoplay:</strong> Media plays automatically</li>
+                    <li><strong>controls:</strong> Media controls are shown</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Scroll to top of content
+            document.querySelector('.content').scrollTop = 0;
+        }
+    </script>
+</body>
+</html>

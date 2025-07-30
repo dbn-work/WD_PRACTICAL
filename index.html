@@ -1,228 +1,1036 @@
 <!DOCTYPE html>
-<lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SE Practical Experiments Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SE Practical Experiments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        html, body  
-        {
-            height: 100%;
+        * {
             margin: 0;
-            padding: 0; 
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            padding: 0;
+            box-sizing: border-box;
         }
+
         body {
-            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+            min-height: 100vh;
+            color: #1e293b;
         }
-        h1 {
-            font-size: 2em;
-            margin: 0 0 6px 0;
-            color: #2a8dbb; /* Changed to a blue shade */
-            letter-spacing: 1px;
-            font-weight: bold;
+
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .header-section {
-            background: #232946;
-            color: #fff;
-            padding: 10px 0 6px 0;
-            text-align: center;
-            border-bottom: 3px solid #eebf63;
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
-        .header-college {
-            font-weight: bold;
-            letter-spacing: 1px;
+
+        .header-left h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
         }
-        .header-institute {
-            color: inherit; /* Inherit from h1 */
-            font-weight: bold;
-            letter-spacing: 1px;
-            font-size: 1.1em;
+
+        .header-left h2 {
+            margin: 0.5rem 0 0 0;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .dropdown {
+            position: relative;
             display: inline-block;
         }
-        .header-title {
-            margin: 0 0 8px 0;
-            font-size: 1.1em;
-            color: #ecebe9;
-            letter-spacing: 1px;
-            font-weight: normal;
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: #ffffff;
+            min-width: 320px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+            border-radius: 8px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            z-index: 1000;
+            margin-top: 5px;
         }
-        .header-details {
-            font-size: 1em;
-            margin-bottom: 2px;
-            color: #ffd166; /* Light yellow for details text */
-        }
-        .header-details strong {
-            color: #06d6a0; /* Green for labels */
-        }
-        .main-container {
-            display: flex;
-            height: calc(100vh - 70px);
-            min-height: 0;
-        }
-        .left-column, .right-column {
-            background: #232946;
-            color: #fff;
-            width: 170px;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            box-sizing: border-box;
-            justify-content: flex-start;
-        }
-        .left-column {
-            border-right: 2px solid #b8c1ec;
-        }
-        .right-column {
-            border-left: 2px solid #b8c1ec;
-        }
-        .column-title {
-            text-align: center;
-            margin: 8px 0 4px 0;
-            letter-spacing: 1px;
-            color: #eebf63;
-            font-size: 0.98em;
-        }
-        .exp-list, .doc-list {
-            list-style: none;
-            padding: 0 0 4px 0;
-            margin: 0;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-        }
-        .exp-list li, .doc-list li {
-            margin: 0;
-            padding: 0;
-        }
-        .exp-btn, .doc-btn {
+
+        .dropdown-content.show {
             display: block;
-            width: 92%;
-            margin: 0 auto;
-            padding: 4px 0;
-            border: none;
-            border-radius: 5px;
-            font-size: 0.92em;
-            background: #eebf63;
-            color: #232946;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-            text-align: center;
-            text-decoration: none;
-            min-height: 22px;
+            animation: dropdownSlide 0.3s ease;
         }
-        .exp-btn:hover, .doc-btn:hover {
-            background: #009688;
-            color: #fff;
+
+        @keyframes dropdownSlide {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .doc-btn {
-            background: #b8c1ec;
-            color: #232946;
-            margin-top: 4px;
-            font-size: 0.92em;
+
+        .dropdown-header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px 8px 0 0;
         }
-        .doc-btn:hover {
-            background: #ff9800;
-            color: #fff;
+
+        .dropdown-title {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
         }
-        .content-area {
-            flex: 1;
-            padding: 0;
-            background: rgba(255,255,255,0.95);
+
+        .dropdown-info {
+            padding: 1rem 0;
+        }
+
+        .info-item {
             display: flex;
-            align-items: stretch;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
         }
-        .iframe-container {
+
+        .info-text {
+            flex: 1;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 0.95rem;
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .header-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .header-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .welcome-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+
+        .welcome-text {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .welcome-text strong {
+            color: #6366f1;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 24px;
+        }
+
+        .section-title a {
+            color: #1e293b;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .section-title a:hover {
+            color: #6366f1;
+            text-decoration: underline;
+        }
+
+        .tutorial-section {
+            margin-bottom: 3rem;
+        }
+
+        .tutorial-cards {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tutorial-card {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            flex: 1;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
+            color: white;
+        }
+
+        .tutorial-card:hover {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .tutorial-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .tutorial-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .tutorial-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .tutorial-desc {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .tutorial-features {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .feature-tag {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .experiments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .experiment-item {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
             width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 0;
-            background: #fff;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.2);
         }
-        @media (max-width: 900px) {
-            .main-container {
+
+        .experiment-item:hover {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .experiment-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .experiment-number {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .experiment-desc {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-left: 36px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 6px;
+            margin: 2px 0;
+        }
+
+        .link-item:last-child {
+            border-bottom: none;
+        }
+
+        .link-item:hover {
+            background-color: rgba(99, 102, 241, 0.05);
+            transform: translateX(3px);
+        }
+
+        .link-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .link-name {
+            font-size: 0.9rem;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .notification-btn {
+            position: relative;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .notification-dropdown {
+            width: 350px;
+        }
+
+        .notification-list {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .notification-item:hover {
+            background-color: rgba(99, 102, 241, 0.05);
+        }
+
+        .notification-item.unread {
+            background-color: rgba(99, 102, 241, 0.02);
+            border-left: 3px solid #6366f1;
+        }
+
+        .notification-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .notification-icon.new {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .notification-desc {
+            font-size: 0.8rem;
+            color: #64748b;
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+
+        .notification-time {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            width: 8px;
+            height: 8px;
+            background: #6366f1;
+            border-radius: 50%;
+        }
+
+        .notification-item.read .notification-dot {
+            display: none;
+        }
+
+        .notification-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #f1f5f9;
+            text-align: center;
+        }
+
+        .view-all-btn, .mark-all-read {
+            background: none;
+            border: none;
+            color: #6366f1;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .view-all-btn:hover, .mark-all-read:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .mark-all-read {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
                 flex-direction: column;
-                height: auto;
+                text-align: center;
+                gap: 15px;
             }
-            .left-column, .right-column {
-                width: 100%;
-                height: auto;
-                flex-direction: row;
-                border: none;
+            
+            .header-buttons {
+                gap: 8px;
+                justify-content: center;
             }
-            .content-area {
-                padding: 0;
+
+            .header-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
             }
-            .iframe-container {
-                height: 60vh;
+            
+            .tutorial-cards {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .welcome-card {
+                padding: 20px;
+            }
+            
+            .experiment-item {
+                padding: 15px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-left h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header-left h2 {
+                font-size: 0.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .header-btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+                gap: 4px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header-section">
-        <h1 class="header-college">
-            <span class="header-institute">YASHWANTRAO BHONSALE INSTITUTE OF TECHNOLOGY</span>
-        </h1>
-        <h3 class="header-title">S.E NEP 2020 Pattern WD-PRACTICAL LIST WITH CODES AND DOCUMENT FILES</h3>
-        <div class="header-details">
-            <strong>Faculty Name:</strong> Mr.Bhaskar Dhuri &nbsp; | &nbsp;
-            <strong>Subject:</strong> Web Designing With WordPress &nbsp; | &nbsp;
-            <strong>Class:</strong> Second Year &nbsp; | &nbsp;
-            <strong>Semester:</strong> III
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>Experiments Solutions</h1>
+                <h2>Web Designing With WordPress - NEP 2020 Pattern</h2>
+            </div>
+            <div class="header-buttons">
+                <div class="dropdown">
+                    <button class="header-btn" onclick="toggleDropdown()">
+                        <i class="fas fa-info-circle"></i> Info <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="infoDropdown" class="dropdown-content">
+                        <div class="dropdown-header">
+                            <h3 class="dropdown-title">Course Information</h3>
+                        </div>
+                        <div class="dropdown-info">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="info-text">
+                                    <div class="info-label">Faculty Name</div>
+                                    <div class="info-value">Mr. Bhaskar Dhuri</div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="info-text">
+                                    <div class="info-label">Subject</div>
+                                    <div class="info-value">Web Designing With WordPress</div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="info-text">
+                                    <div class="info-label">Academic Year</div>
+                                    <div class="info-value">Second Year</div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <div class="info-text">
+                                    <div class="info-label">Semester</div>
+                                    <div class="info-value">Semester III</div>
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="info-text">
+                                    <div class="info-label">Course Pattern</div>
+                                    <div class="info-value">NEP 2020 Pattern</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="header-btn" onclick="toggleLinksDropdown()">
+                        <i class="fas fa-link"></i> Links <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="linksDropdown" class="dropdown-content">
+                        <div class="dropdown-header">
+                            <h3 class="dropdown-title">Frontend Development Resources</h3>
+                        </div>
+                        <div class="dropdown-info">
+                            <div class="link-item" onclick="openLink('https://developer.mozilla.org/en-US/docs/Web/HTML')">
+                                <div class="link-icon">
+                                    <i class="fab fa-html5"></i>
+                                </div>
+                                <div class="link-name">HTML Documentation</div>
+                            </div>
+                            
+                            <div class="link-item" onclick="openLink('https://developer.mozilla.org/en-US/docs/Web/CSS')">
+                                <div class="link-icon">
+                                    <i class="fab fa-css3-alt"></i>
+                                </div>
+                                <div class="link-name">CSS Documentation</div>
+                            </div>
+                            
+                            <div class="link-item" onclick="openLink('https://www.w3schools.com/html/')">
+                                <div class="link-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="link-name">HTML Tutorial</div>
+                            </div>
+                            
+                            <div class="link-item" onclick="openLink('https://www.w3schools.com/css/')">
+                                <div class="link-icon">
+                                    <i class="fas fa-paint-brush"></i>
+                                </div>
+                                <div class="link-name">CSS Tutorial</div>
+                            </div>
+                            
+                            <div class="link-item" onclick="openLink('https://css-tricks.com/')">
+                                <div class="link-icon">
+                                    <i class="fas fa-magic"></i>
+                                </div>
+                                <div class="link-name">CSS Tips & Tricks</div>
+                            </div>
+                            
+                            <div class="link-item" onclick="openLink('https://codepen.io/')">
+                                <div class="link-icon">
+                                    <i class="fab fa-codepen"></i>
+                                </div>
+                                <div class="link-name">CodePen</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="header-btn notification-btn" onclick="toggleNotificationDropdown()">
+                        <i class="fas fa-bell"></i> 
+                        <span class="notification-badge">3</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="notificationDropdown" class="dropdown-content notification-dropdown">
+                        <div class="dropdown-header">
+                            <h3 class="dropdown-title">Recent Notifications</h3>
+                            <button class="mark-all-read" onclick="markAllAsRead()">Mark all as read</button>
+                        </div>
+                        <div class="notification-list">
+                            <div class="notification-item unread" data-id="1">
+                                <div class="notification-icon new">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">First Practical Added</div>
+                                    <div class="notification-desc">Experiment 1: Personal Profile Page using HTML5 Tags</div>
+                                    <div class="notification-time">2 minutes ago</div>
+                                </div>
+                                <div class="notification-dot"></div>
+                            </div>
+                            
+                            <div class="notification-item unread" data-id="2">
+                                <div class="notification-icon new">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">CSS Tutorial Updated</div>
+                                    <div class="notification-desc">New examples added to CSS styling experiment</div>
+                                    <div class="notification-time">1 hour ago</div>
+                                </div>
+                                <div class="notification-dot"></div>
+                            </div>
+                            
+                            <div class="notification-item unread" data-id="3">
+                                <div class="notification-icon new">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-title">Course Materials Ready</div>
+                                    <div class="notification-desc">All practical experiments are now available</div>
+                                    <div class="notification-time">3 hours ago</div>
+                                </div>
+                                <div class="notification-dot"></div>
+                            </div>
+                        </div>
+                        <div class="notification-footer">
+                            <button class="view-all-btn" onclick="viewAllNotifications()">View All Notifications</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="welcome-card">
+            <p class="welcome-text">
+                Welcome to the practical experiments repository for <strong>Web Designing With Wordpress</strong>. 
+                Explore core web development practicals with code samples and interactive demonstrations.
+            </p>
+        </div>
+
+        <!-- Tutorial Cards Section -->
+        <section class="tutorial-section">
+            <h3 class="section-title">📚 Basic Tutorials</h3>
+            <div class="tutorial-cards">
+                <div class="tutorial-card" onclick="openTutorial('html-basics.html')">
+                    <div class="tutorial-header">
+                        <div class="tutorial-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <h4 class="tutorial-title">HTML5 Basics</h4>
+                    </div>
+                    <p class="tutorial-desc">Complete guide to HTML5 tags, semantic elements, forms, and document structure.</p>
+                    <div class="tutorial-features">
+                        <span class="feature-tag">Semantic Tags</span>
+                        <span class="feature-tag">Forms</span>
+                        <span class="feature-tag">Media</span>
+                    </div>
+                </div>
+
+                <div class="tutorial-card" onclick="openTutorial('css-basics.html')">
+                    <div class="tutorial-header">
+                        <div class="tutorial-icon">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <h4 class="tutorial-title">CSS Basics</h4>
+                    </div>
+                    <p class="tutorial-desc">Master CSS fundamentals including selectors, properties, layout techniques, and responsive design.</p>
+                    <div class="tutorial-features">
+                        <span class="feature-tag">Selectors</span>
+                        <span class="feature-tag">Flexbox</span>
+                        <span class="feature-tag">Responsive</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <h3 class="section-title"><a href="Practical List-WD.pdf" id="experiments">Experiments List</a></h3>
+        
+        <div class="experiments-list">
+            <button class="experiment-item" onclick="loadExp('Experiment1/Experiment1.html')">
+                <div class="experiment-title">
+                    <div class="experiment-number">1</div>
+                    Personal Profile Page using HTML5 Tags
+                </div>
+                <div class="experiment-desc">
+                    Create a personal profile page using HTML5 tags including headings, lists, links, and tables
+                </div>
+            </button>
+            
+            <button class="experiment-item" onclick="loadExp('Experiment2/Experiment2.html')">
+                <div class="experiment-title">
+                    <div class="experiment-number">2</div>
+                    CSS Styling with Selectors and Classes
+                </div>                   
+                <div class="experiment-desc">
+                    Apply internal and external CSS for styling with selectors, classes, ID, and text formatting
+                </div>
+            </button>
+            
+            <button class="experiment-item" onclick="loadExp('Experiment3/Experiment3.html')">
+                <div class="experiment-title">
+                    <div class="experiment-number">3</div>
+                    Media Manager with Images, Videos & Audio
+                </div>
+                <div class="experiment-desc">
+                    Build a comprehensive media manager with images, videos, and audio files
+                </div>
+            </button>
+            
+            <button class="experiment-item" onclick="loadExp('Experiment4/exp4.html')">
+                <div class="experiment-title">
+                    <div class="experiment-number">4</div>
+                    Advanced Web Features & Interactive Elements
+                </div>
+                <div class="experiment-desc">
+                    Implement advanced web features and interactive elements for enhanced user experience
+                </div>
+            </button>
+            
+            <button class="experiment-item" onclick="loadExp('Experiment5/exp5.html')">
+                <div class="experiment-title">
+                    <div class="experiment-number">5</div>
+                    Responsive Design for All Devices
+                </div>
+                <div class="experiment-desc">
+                    Create responsive layouts that work seamlessly across all devices and screen sizes
+                </div>
+            </button>
+            
+            <button class="experiment-item" onclick="loadExp('Experiment6/exp6.html')">
+                <div class="experiment-title">
+                    <div class="experiment-number">6</div>
+                    Final Project - Complete Web Application
+                </div>
+                <div class="experiment-desc">
+                    Complete web application showcasing all learned concepts and techniques
+                </div>
+            </button>
         </div>
     </div>
-    <div class="main-container">
-        <!-- Left column: Experiment HTML output -->
-        <nav class="left-column">
-            <h2 class="column-title">Experiments</h2>
-            <ul class="exp-list">
-                <li><button class="exp-btn" onclick="loadExp('Experiment1/hello.html')">Experiment 1</button></li>
-                <li><button class="exp-btn" onclick="loadExp('Experiment2/Experiment2.html')">Experiment 2</button></li>
-                <li><button class="exp-btn" onclick="loadExp('Experiment3/Experiment3.html')">Experiment 3</button></li>
-                <li><button class="exp-btn" onclick="loadExp('Experiment4/exp4.html')">Experiment 4</button></li>
-                <li><button class="exp-btn" onclick="loadExp('Experiment5/exp5.html')">Experiment 5</button></li>
-                <li><button class="exp-btn" onclick="loadExp('Experiment6/exp6.html')">Experiment 6</button></li>
-                <li><button class="exp-btn" onclick="loadExp('Experiment7/exp7.html')">Experiment 7</button></li>
-                <li><button class="exp-btn" onclick="loadExp('Experiment8/exp8.html')">Experiment 8</button></li>
-                <li><button class="exp-btn" onclick="loadExp('Experiment9/exp9.html')">Experiment 9</button></li>
-                <li><button class="exp-btn" onclick="loadExp('Experiment10/exp10.html')">Experiment 10</button></li>
-            </ul>
-        </nav>
-        <!-- Center: Output area -->
-        <main class="content-area">
-            <iframe id="expFrame" class="iframe-container" src="" title="Experiment Output"></iframe>
-        </main>
-        <!-- Right column: Document links -->
-        <nav class="right-column">
-            <h2 class="column-title">Experiment Docs</h2>
-            <ul class="doc-list">
-                <li><button class="doc-btn" onclick="loadDoc('Experiment1/Experiment1.docx')">Exp 1 Doc</button></li>
-                <li><button class="doc-btn" onclick="loadDoc('Experiment2/Experiment2.docx')">Exp 2 Doc</button></li>
-                <li><button class="doc-btn" onclick="loadDoc('Experiment3/Experiment3.docx')">Exp 3 Doc</button></li>
-                <li><button class="doc-btn" onclick="loadDoc('Experiment4/exp4.docx')">Exp 4 Doc</button></li>
-                <li><button class="doc-btn" onclick="loadDoc('Experiment5/exp5.docx')">Exp 5 Doc</button></li>
-                <li><button class="doc-btn" onclick="loadDoc('Experiment6/exp6.docx')">Exp 6 Doc</button></li>
-                <li><button class="doc-btn" onclick="loadDoc('Experiment7/exp7.docx')">Exp 7 Doc</button></li>
-                <li><button class="doc-btn" onclick="loadDoc('Experiment8/exp8.docx')">Exp 8 Doc</button></li>
-                <li><button class="doc-btn" onclick="loadDoc('Experiment9/exp9.docx')">Exp 9 Doc</button></li>
-                <li><button class="doc-btn" onclick="loadDoc('Experiment10/exp10.docx')">Exp 10 Doc</button></li>
-            </ul>
-        </nav>
-    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 SE Practicals. All rights reserved.</p>
+    </footer>
+
     <script>
-        function loadExp(page) 
-        { document.getElementById('expFrame').src = page; }
-        function loadDoc(docPath){
-            // For local files, Google Docs Viewer will not work.
-            // You must upload your DOCX files to a public server for this to work.
-            var url = location.origin + '/' + docPath;
-            var viewer = 'https://docs.google.com/viewer?url=' + encodeURIComponent(url) + '&embedded=true';
-            document.getElementById('expFrame').src = viewer;
+        async function loadExp(path) {
+            window.open(path, '_blank');
         }
+
+        function toggleDropdown() {
+            const dropdown = document.getElementById('infoDropdown');
+            dropdown.classList.toggle('show');
+            // Close other dropdowns
+            const linksDropdown = document.getElementById('linksDropdown');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+            linksDropdown.classList.remove('show');
+            notificationDropdown.classList.remove('show');
+        }
+
+        function toggleLinksDropdown() {
+            const dropdown = document.getElementById('linksDropdown');
+            dropdown.classList.toggle('show');
+            // Close other dropdowns
+            const infoDropdown = document.getElementById('infoDropdown');
+            const notificationDropdown = document.getElementById('notificationDropdown');
+            infoDropdown.classList.remove('show');
+            notificationDropdown.classList.remove('show');
+        }
+
+        function toggleNotificationDropdown() {
+            const dropdown = document.getElementById('notificationDropdown');
+            dropdown.classList.toggle('show');
+            // Close other dropdowns
+            const infoDropdown = document.getElementById('infoDropdown');
+            const linksDropdown = document.getElementById('linksDropdown');
+            infoDropdown.classList.remove('show');
+            linksDropdown.classList.remove('show');
+        }
+
+        function openLink(url) {
+            window.open(url, '_blank');
+        }
+
+        function openTutorial(url) {
+            window.open(url, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+        }
+
+        function markAllAsRead() {
+            const unreadItems = document.querySelectorAll('.notification-item.unread');
+            unreadItems.forEach(item => {
+                item.classList.remove('unread');
+                item.classList.add('read');
+            });
+            
+            // Update badge count
+            const badge = document.querySelector('.notification-badge');
+            badge.textContent = '0';
+            badge.style.display = 'none';
+            
+            // Show success message
+            showToast('All notifications marked as read!');
+        }
+
+        function viewAllNotifications() {
+            // This would typically navigate to a full notifications page
+            showToast('Opening all notifications...');
+        }
+
+        function showToast(message) {
+            // Create toast notification
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #10b981, #059669);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+                box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+            `;
+            toast.textContent = message;
+            
+            // Add animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(toast);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.closest('.dropdown')) {
+                const infoDropdown = document.getElementById('infoDropdown');
+                const linksDropdown = document.getElementById('linksDropdown');
+                const notificationDropdown = document.getElementById('notificationDropdown');
+                
+                if (infoDropdown.classList.contains('show')) {
+                    infoDropdown.classList.remove('show');
+                }
+                if (linksDropdown.classList.contains('show')) {
+                    linksDropdown.classList.remove('show');
+                }
+                if (notificationDropdown.classList.contains('show')) {
+                    notificationDropdown.classList.remove('show');
+                }
+            }
+        }
+
+        // Add click handlers for notification items
+        document.addEventListener('DOMContentLoaded', function() {
+            const notificationItems = document.querySelectorAll('.notification-item');
+            notificationItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this.classList.contains('unread')) {
+                        this.classList.remove('unread');
+                        this.classList.add('read');
+                        
+                        // Update badge count
+                        const badge = document.querySelector('.notification-badge');
+                        const currentCount = parseInt(badge.textContent);
+                        const newCount = currentCount - 1;
+                        badge.textContent = newCount;
+                        
+                        if (newCount === 0) {
+                            badge.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>

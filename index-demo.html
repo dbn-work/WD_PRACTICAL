@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SE Practical Experiments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f0f23;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            padding: 25px 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-left h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .header-left h2 {
+            font-size: 1rem;
+            color: #b8d4f0;
+            font-weight: 400;
+        }
+
+        .header-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e8f4fd;
+            font-weight: 500;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-item i {
+            color: #64b5f6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #64b5f6, #42a5f5);
+            border-radius: 2px;
+        }
+
+        .experiments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .experiment-card {
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border: 1px solid #2d3748;
+            padding: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experiment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #64b5f6, #42a5f5, #1976d2);
+        }
+
+        .experiment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(100, 181, 246, 0.2);
+            border-color: #64b5f6;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #64b5f6, #1976d2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(100, 181, 246, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64b5f6;
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #a0aec0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #2d3748;
+        }
+
+        .card-tag {
+            background: rgba(100, 181, 246, 0.1);
+            color: #64b5f6;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .card-arrow {
+            color: #64b5f6;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .experiment-card:hover .card-arrow {
+            transform: translateX(5px);
+        }
+
+        .footer {
+            background: #0a0a1a;
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid #2d3748;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .header-info {
+                gap: 15px;
+                justify-content: center;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .experiments-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .experiment-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>YBIT Practical Experiments</h1>
+                <h2>Web Designing With WordPress - NEP 2020 Pattern</h2>
+            </div>
+            <div class="header-info">
+                <div class="info-item">
+                    <i class="fas fa-user"></i>
+                    <span>Mr. Bhaskar Dhuri</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-book"></i>
+                    <span>Web Designing</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Second Year</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>Semester III</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h3 class="section-title">Practical Experiments</h3>
+        
+        <div class="experiments-grid">
+            <button class="experiment-card" onclick="loadExp('Experiment1/Experiment1.html')">
+                <div class="card-header">
+                    <div class="card-number">1</div>
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+                <div class="card-title">Personal Profile</div>
+                <div class="card-desc">Create a personal profile page using HTML5 tags including headings, lists, links, and tables</div>
+                <div class="card-footer">
+                    <div class="card-tag">HTML5</div>
+                    <div class="card-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </button>
+            
+            <button class="experiment-card" onclick="loadExp('Experiment2/Experiment2.html')">
+                <div class="card-header">
+                    <div class="card-number">2</div>
+                    <div class="card-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                </div>
+                <div class="card-title">CSS Styling</div>
+                <div class="card-desc">Apply internal and external CSS for styling with selectors, classes, ID, and text formatting</div>
+                <div class="card-footer">
+                    <div class="card-tag">CSS3</div>
+                    <div class="card-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </button>
+            
+            <button class="experiment-card" onclick="loadExp('Experiment3/Experiment3.html')">
+                <div class="card-header">
+                    <div class="card-number">3</div>
+                    <div class="card-icon">
+                        <i class="fas fa-photo-video"></i>
+                    </div>
+                </div>
+                <div class="card-title">Media Manager</div>
+                <div class="card-desc">Build a comprehensive media manager with images, videos, and audio files</div>
+                <div class="card-footer">
+                    <div class="card-tag">Media</div>
+                    <div class="card-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </button>
+            
+            <button class="experiment-card" onclick="loadExp('Experiment4/exp4.html')">
+                <div class="card-header">
+                    <div class="card-number">4</div>
+                    <div class="card-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                </div>
+                <div class="card-title">Advanced Features</div>
+                <div class="card-desc">Implement advanced web features and interactive elements</div>
+                <div class="card-footer">
+                    <div class="card-tag">Advanced</div>
+                    <div class="card-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </button>
+            
+            <button class="experiment-card" onclick="loadExp('Experiment5/exp5.html')">
+                <div class="card-header">
+                    <div class="card-number">5</div>
+                    <div class="card-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                </div>
+                <div class="card-title">Responsive Design</div>
+                <div class="card-desc">Create responsive layouts that work across all devices and screen sizes</div>
+                <div class="card-footer">
+                    <div class="card-tag">Responsive</div>
+                    <div class="card-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </button>
+            
+            <button class="experiment-card" onclick="loadExp('Experiment6/exp6.html')">
+                <div class="card-header">
+                    <div class="card-number">6</div>
+                    <div class="card-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                </div>
+                <div class="card-title">Final Project</div>
+                <div class="card-desc">Complete web application showcasing all learned concepts and techniques</div>
+                <div class="card-footer">
+                    <div class="card-tag">Project</div>
+                    <div class="card-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 YBIT Practical Experiments. All rights reserved.</p>
+    </footer>
+
+    <script>
+        async function loadExp(path) {
+            window.open(path, '_blank');
+        }
+    </script>
+</body>
+</html>
